@@ -152,4 +152,8 @@ module Semian
   end
 end
 
-::Redis::Client.include(Semian::Redis)
+if Redis::VERSION < "5.0.0"
+  ::Redis::Client.include(Semian::Redis)
+else
+  require_relative "redis_client"
+end

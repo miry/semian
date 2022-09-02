@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "test_helper"
+require "hiredis-client"
 require "benchmark"
 
 module RedisTests
@@ -20,6 +21,7 @@ module RedisTests
   attr_writer :threads
 
   def setup
+    return skip "For Redis 5.x use RedisClient instead" if Redis::VERSION >= "5.0.0"
     @proxy = Toxiproxy[:semian_test_redis]
     Semian.destroy(:redis_testing)
   end
