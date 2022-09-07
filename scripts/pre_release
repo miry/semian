@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 tag=$(git tag --contains HEAD | wc -l)
 
 if [ $tag == "0" ] ; then
